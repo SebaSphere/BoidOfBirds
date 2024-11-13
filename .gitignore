@@ -1,0 +1,171 @@
+build/*
+.gradle/
+
+# Compiled source files
+*.class
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+*.ipr
+
+# Windows thumbnail cache files
+Thumbs.db
+
+# macOS files
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Java
+*.jar
+*.war
+*.ear
+
+# Distribution / packaging
+*.box
+*.gem
+*.o
+*.out
+*.IAS
+*.LCK
+*.oe
+*.suite
+*.stackdump
+*.vagrant
+*.orig
+*.rej
+
+# Ruby
+*.gem
+log/
+tmp/
+.god
+.rev
+.rvmrc
+.ruby-version
+
+# Static site builds
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Redcar project files
+.redcar/
+
+# SASS
+.sass-cache/
+
+# Stylus
+.cache/
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Vagrant
+.vagrant/
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Visual Studio 6 build log
+*.plg
+
+# Visual Studio Code
+.vscode/
+
+# Ansible
+.vagrant/
+venv/
+.venv/
+
+# Conventional Eclipse project files
+*.project
+*.classpath
+*.cproject
+.settings/
+
+# Local IDE files
+.idea/
+*.vscode/
+.history/
+
+# Vim /
+.vim/
+.tmp/
+
+# Gradle
+.gradle/
+build/
+
+# JetBrains IDE
+.intellij/
+
+# Code blocks
+.nb.virtual_git/
+*.layout/
+
+# Windows explorer
+desktop.ini
+Thumbs.db
+
+# Compression and archive files
+*.7z
+*.o
+*.box
+*.bz2
+*.img
+*.iso
+*.psd
+*.orig
+*.rej
+
+# Jekyll
+_site/
+
+# Dist folder
+dist/
+
+# Yarn folder
+.yarn/
+
+# Coverage folder used by tools like istanbul
+coverage/
+
+# Webstorm
+.idea/
+
+# Docker files
+docker-compose.override.yml
+docker-compose.override.yml
+
+# Sensitive files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Temporary folders and files
+tmp/
+temp/
