@@ -1,3 +1,5 @@
+
+
 plugins {
     id 'java'
 }
@@ -7,11 +9,23 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://s01.oss.sonatype.org" }
+    maven { url 'https://jitpack.io' }
 }
+
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+    implementation ("com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion") {
+        exclude group: "org.jcraft", module: "jorbis"
+    }
+    implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
 }
 
 test {
