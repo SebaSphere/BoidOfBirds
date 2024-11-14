@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import dev.sebastianb.client.screen.MainMenuScreen;
+import dev.sebastianb.client.screen.WorldRendererScreen;
+import dev.sebastianb.world.WorldLevelStage;
 
 public class GameClient extends Game {
 
@@ -13,6 +15,8 @@ public class GameClient extends Game {
     public SpriteBatch batch;
     public BitmapFont font;
     public FitViewport viewport;
+
+    private WorldLevelStage worldLevelStage = new WorldLevelStage();
 
     @Override
     public void create() {
@@ -25,12 +29,16 @@ public class GameClient extends Game {
         font.setUseIntegerPositions(false);
         font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
 
-        this.setScreen(new MainMenuScreen(this));
+        this.setScreen(new WorldRendererScreen(this));
     }
 
     @Override
     public void render() {
         super.render();
+        // if in world screen, update logic
+        if (this.screen instanceof WorldRendererScreen worldRendererScreen) {
+            worldLevelStage.preTick();
+        }
     }
 
     @Override
