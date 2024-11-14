@@ -1,5 +1,4 @@
 build/*
-.gradle/
 
 # Compiled source files
 *.class
@@ -169,3 +168,4 @@ docker-compose.override.yml
 # Temporary folders and files
 tmp/
 temp/
+/.gradle/
