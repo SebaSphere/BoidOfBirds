@@ -37,7 +37,6 @@ public class MainMenuScreen implements Screen {
 
         gameClient.batch.end();
         if (Gdx.input.isTouched()) {
-            System.out.println("MEOW!");
             gameClient.setScreen(new MainMenuScreen(gameClient));
             dispose();
         }
