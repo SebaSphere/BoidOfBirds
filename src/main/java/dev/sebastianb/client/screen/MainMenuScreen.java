@@ -37,6 +37,7 @@ public class MainMenuScreen implements Screen {
 
         gameClient.batch.end();
         if (Gdx.input.isTouched()) {
+            System.out.println("\t\t\t\t\t\t\t\t\t\t\tThere is no Game Here");
             gameClient.setScreen(new MainMenuScreen(gameClient));
             dispose();
         }
