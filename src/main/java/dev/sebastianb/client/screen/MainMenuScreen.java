@@ -44,9 +44,9 @@ public class MainMenuScreen implements Screen
 
         // render logic
 /*
-        for (BaseButton button : buttons)
+        for (BaseButton button : Buttons)
         {
-            Basebutton.draw(batch);
+            BaseButton.draw(batch);
         }
 */
         {
