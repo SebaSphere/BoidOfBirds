@@ -25,5 +25,19 @@ public class BaseButton
         return new int[] {0, 0, texture.getWidth(), texture.getHeight()};
     }
 
+    public String getAssetLocation()
+    {
 
+        return texture.toString();
+    }
+
+    public void draw(SpriteBatch batch)
+    {
+        batch.draw(texture, xAxis, yAxis, texture.getWidth() * scaleMultiplier, texture.getHeight() * scaleMultiplier);
+    }
+
+    public void dispose()
+    {
+        texture.dispose();
+    }
 }
