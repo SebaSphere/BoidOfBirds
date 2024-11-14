@@ -1,10 +1,12 @@
 package dev.sebastianb.client.screen;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 import dev.sebastianb.client.GameClient;
 
+// TODO: perhaps have a widget system to make it simple to make buttons?
 public class MainMenuScreen implements Screen {
 
     GameClient gameClient;
@@ -26,16 +28,24 @@ public class MainMenuScreen implements Screen {
         gameClient.batch.setProjectionMatrix(gameClient.viewport.getCamera().combined);
 
         gameClient.batch.begin();
-        //draw text. Remember that x and y are in meters
-        gameClient.font.draw(gameClient.batch, "Welcome to Drop!!! ", 1, 1.5f);
-        gameClient.font.draw(gameClient.batch, "Tap anywhere to begin!", 1, 1);
+
+        // render logic
+        {
+            gameClient.font.draw(gameClient.batch, "Welcome to the game!!! ", 1, 1.5f);
+            gameClient.font.draw(gameClient.batch, "Tap anywhere to begin!", 1, 1);
+        }
+
         gameClient.batch.end();
-        
+        if (Gdx.input.isTouched()) {
+            System.out.println("MEOW!");
+            gameClient.setScreen(new MainMenuScreen(gameClient));
+            dispose();
+        }
     }
 
     @Override
-    public void resize(int i, int i1) {
-
+    public void resize(int width, int height) {
+        gameClient.viewport.update(width, height, true);
     }
 
     @Override
