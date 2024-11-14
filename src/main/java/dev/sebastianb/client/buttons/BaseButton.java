@@ -10,9 +10,9 @@ public class BaseButton
     private Texture texture;
     private float scaleMultiplier;
 
-    public BaseButton (String menuNavigation, int x, int y, String assetLocation,float scaleMultiplier)
+    public BaseButton (int x, int y, String assetLocation,float scaleMultiplier)
     {
-        this.menuNavigation = menuNavigation;
+
         this.xAxis = x;
         this.yAxis = y;
         this.scaleMultiplier  = scaleMultiplier;
