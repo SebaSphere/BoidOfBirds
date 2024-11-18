@@ -33,6 +33,11 @@ public class GameClient extends Game {
     }
 
     @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+    }
+
+    @Override
     public void render() {
         super.render();
         // if in world screen, update logic
