@@ -13,6 +13,8 @@ public class RenderUtils {
         configuration.setForegroundFPS(Lwjgl3ApplicationConfiguration.getDisplayMode().refreshRate + 1);
         configuration.setWindowedMode(800, 500); // this line changes the size of the window
         configuration.setWindowIcon("assets/icon.png");
+        int[] monitorSize = {Lwjgl3ApplicationConfiguration.getDisplayMode().width, Lwjgl3ApplicationConfiguration.getDisplayMode().height};
+        configuration.setWindowSizeLimits(monitorSize[0] / 3, monitorSize[1] / 3, monitorSize[0], monitorSize[1]);
 
         return configuration;
     }

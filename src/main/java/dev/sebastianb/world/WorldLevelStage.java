@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class WorldLevelStage {
 
+    int tickCount = 0;
 
     private ArrayList<Entity> entities = new ArrayList<>();
 
@@ -28,16 +29,21 @@ public class WorldLevelStage {
 
     public void preTick() {
 
-
         if (lastTickTime + TICK_SPREAD_DURATION < System.currentTimeMillis()) {
             lastTickTime = System.currentTimeMillis();
             shouldUpdateTick = true;
         }
 
-
         if (shouldUpdateTick) {
-            System.out.println("tick" + lastTickTime);
+            tickCount++;
             shouldUpdateTick = false;
+            postTick();
+        }
+    }
+
+    private void postTick() {
+        for (Entity entity : entities) {
+            entity.tick(tickCount);
         }
     }
 
