@@ -17,16 +17,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dev.sebastianb.client.GameClient;
+import dev.sebastianb.client.registry.ScreenRegistry;
 
 
 import java.util.ArrayList;
 
 // TODO: perhaps have a widget system to make it simple to make buttons?
-public class MainMenuScreen implements Screen
-{
+public class MainMenuScreen extends GameScreen {
 
     private SpriteBatch batch;
-    GameClient gameClient;
 
     Texture texture;
     TextButton.TextButtonStyle textButtonStyle;
@@ -36,8 +35,10 @@ public class MainMenuScreen implements Screen
 
     float realButtonWidth = 0, realButtonHeight;
 
+
+
     public MainMenuScreen(GameClient game) {
-        this.gameClient = game;
+        super(game);
 
         batch = new SpriteBatch();
 
@@ -61,13 +62,6 @@ public class MainMenuScreen implements Screen
         realButtonHeight = button.getHeight();
         realButtonWidth = button.getWidth();
 
-        // Adding action to button touch
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Button has been clicked");
-            }
-        });
 
     }
 
@@ -115,7 +109,7 @@ public class MainMenuScreen implements Screen
                     touchY >= button.getY() && touchY <= button.getY() + button.getHeight()) {
 
                 this.dispose();
-                gameClient.setScreen(new WorldRendererScreen(gameClient));
+                gameClient.setScreen(ScreenRegistry.WORLD_SCREEN.getGameScreen());
             }
         }
 

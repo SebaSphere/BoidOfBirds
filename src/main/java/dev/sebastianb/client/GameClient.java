@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import dev.sebastianb.client.screen.MainMenuScreen;
+import dev.sebastianb.client.registry.ScreenRegistry;
 import dev.sebastianb.client.screen.WorldRendererScreen;
 import dev.sebastianb.world.WorldLevelStage;
 
@@ -29,7 +30,9 @@ public class GameClient extends Game {
         font.setUseIntegerPositions(false);
         font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
 
-        this.setScreen(new MainMenuScreen(this));
+        ScreenRegistry.register(this);
+
+        this.setScreen(ScreenRegistry.MENU.getGameScreen());
     }
 
     @Override

@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
 import dev.sebastianb.client.GameClient;
 
-public class WorldRendererScreen implements Screen {
+public class WorldRendererScreen extends GameScreen {
 
     private GameClient gameClient;
 
     public WorldRendererScreen(GameClient game) {
+        super(game);
         this.gameClient = game;
     }
 
