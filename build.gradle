@@ -25,7 +25,7 @@ dependencies {
         exclude group: "org.jcraft", module: "jorbis"
     }
     implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-
+    implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
 }
 
 test {

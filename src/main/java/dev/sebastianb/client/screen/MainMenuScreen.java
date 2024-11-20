@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dev.sebastianb.client.GameClient;
 
+
 import java.util.ArrayList;
 
 // TODO: perhaps have a widget system to make it simple to make buttons?
@@ -46,11 +47,16 @@ public class MainMenuScreen implements Screen
 
         textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(texture));
 
-        // Set the font you locally have available
-        BitmapFont buttonFont = new BitmapFont();
-        textButtonStyle.font = buttonFont;
 
-        button = new TextButton("Button Text", textButtonStyle);
+
+
+        // Set the font you locally have available
+       BitmapFont buttonFont = new BitmapFont();
+        buttonFont.getData().setScale(5.0f);
+
+
+        textButtonStyle.font = buttonFont;
+        button = new TextButton("Start", textButtonStyle);
 
         realButtonHeight = button.getHeight();
         realButtonWidth = button.getWidth();
@@ -129,7 +135,10 @@ public class MainMenuScreen implements Screen
     }
 
     @Override
-    public void dispose() {
+    public void dispose()
+    {
+        batch.dispose();
+        texture.dispose();
 
     }
 }

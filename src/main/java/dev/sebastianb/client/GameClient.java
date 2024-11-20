@@ -29,7 +29,7 @@ public class GameClient extends Game {
         font.setUseIntegerPositions(false);
         font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
 
-        this.setScreen(new WorldRendererScreen(this));
+        this.setScreen(new MainMenuScreen(this));
     }
 
     @Override
