@@ -32,6 +32,8 @@ public class MainMenuScreen implements Screen
     TextButton.TextButtonStyle textButtonStyle;
     Button button;
 
+    Stage stage = new Stage();
+
     float realButtonWidth = 0, realButtonHeight;
 
     public MainMenuScreen(GameClient game) {
@@ -48,10 +50,8 @@ public class MainMenuScreen implements Screen
         textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(texture));
 
 
-
-
         // Set the font you locally have available
-       BitmapFont buttonFont = new BitmapFont();
+        BitmapFont buttonFont = new BitmapFont();
         buttonFont.getData().setScale(5.0f);
 
 
@@ -104,11 +104,21 @@ public class MainMenuScreen implements Screen
         button.setSize(realButtonWidth * scale / 2, realButtonHeight * scale / 2);
 
 
-
-        // Adding button to stage and adding stage to Gdx input processor
-        Stage stage = new Stage();
         stage.addActor(button);
         Gdx.input.setInputProcessor(stage);
+        // Input checking for button overlap
+        if (Gdx.input.justTouched()) {
+            float touchX = Gdx.input.getX(); // Screen coordinates
+            float touchY = Gdx.graphics.getHeight() - Gdx.input.getY(); // Invert Y-axis
+
+            if (touchX >= button.getX() && touchX <= button.getX() + button.getWidth() &&
+                    touchY >= button.getY() && touchY <= button.getY() + button.getHeight()) {
+
+                this.dispose();
+                gameClient.setScreen(new WorldRendererScreen(gameClient));
+            }
+        }
+
 
         // Drawing the stage
         stage.draw();
@@ -139,6 +149,7 @@ public class MainMenuScreen implements Screen
     {
         batch.dispose();
         texture.dispose();
+        stage.dispose();
 
     }
 }

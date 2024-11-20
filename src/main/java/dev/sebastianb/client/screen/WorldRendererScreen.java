@@ -21,7 +21,7 @@ public class WorldRendererScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.RED);
+        ScreenUtils.clear(Color.BLUE);
 
         gameClient.viewport.apply();
         gameClient.batch.setProjectionMatrix(gameClient.viewport.getCamera().combined);
