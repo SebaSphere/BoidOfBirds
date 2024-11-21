@@ -7,6 +7,7 @@ import dev.sebastianb.entity.Entity;
 import dev.sebastianb.entity.boid.SmallBoidEntity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class WorldLevelStage {
 
@@ -22,7 +23,13 @@ public class WorldLevelStage {
 
     public WorldLevelStage() {
         // test entity
-        entities.add(new SmallBoidEntity(this, 426, 250));
+        Random random = new Random();
+
+        for (int i = 0; i < 50; i++) {
+            int x = random.nextInt(400);
+            int y = random.nextInt(400);
+            entities.add(new SmallBoidEntity(this, x, y));
+        }
         // use gdx time since start
         lastTickTime = System.currentTimeMillis();
     }

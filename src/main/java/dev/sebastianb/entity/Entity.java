@@ -39,12 +39,27 @@ public abstract class Entity {
         int textureWidth = getSprite().getRegionWidth();
         int textureHeight = getSprite().getRegionHeight();
 
+        boolean hitHorizontalEdge = false;
+        boolean hitVerticalEdge = false;
+
         // check bounds considering the width and height of the texture
         if (x < 0 || x + textureWidth > windowWidth) {
             rotationOffset = (rotationOffset + 180) % 360;
+            hitHorizontalEdge = true;
         }
         if (y < 0 || y + textureHeight > windowHeight) {
             rotationOffset = (rotationOffset + 180) % 360;
+            hitVerticalEdge = true;
+        }
+
+        // If entity hits a corner, randomly changes its horizontal direction (I hope this works, VERY rarely happens and this code was AI gen)
+        if (hitHorizontalEdge && hitVerticalEdge) {
+
+            if (Math.random() > 0.5) {
+                rotationOffset = (rotationOffset + 90) % 360;
+            } else {
+                rotationOffset = (rotationOffset - 90) % 360;
+            }
         }
     }
 
@@ -54,6 +69,14 @@ public abstract class Entity {
     public float getRotationAngle() {
 
         return 180 + rotationOffset;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
     }
 
     public void setRotation(float rotation) {
