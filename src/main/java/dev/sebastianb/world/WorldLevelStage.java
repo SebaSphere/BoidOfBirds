@@ -28,7 +28,11 @@ public class WorldLevelStage {
         for (int i = 0; i < 50; i++) {
             int x = random.nextInt(400);
             int y = random.nextInt(400);
-            entities.add(new SmallBoidEntity(this, x, y));
+            var boid = new SmallBoidEntity(this, x, y);
+            boid.setVelocityX(-5 + random.nextFloat(10));
+            boid.setVelocityY(-5 + random.nextFloat(10));
+
+            entities.add(boid);
         }
         // use gdx time since start
         lastTickTime = System.currentTimeMillis();

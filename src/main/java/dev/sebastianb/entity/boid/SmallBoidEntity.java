@@ -27,6 +27,14 @@ public class SmallBoidEntity extends Entity {
 
     }
 
+    public void setVelocityX(float velocityX) {
+        this.velocityX = velocityX;
+    }
+
+    public void setVelocityY(float velocityY) {
+        this.velocityY = velocityY;
+    }
+
     @Override
     public void tick(int time) {
 

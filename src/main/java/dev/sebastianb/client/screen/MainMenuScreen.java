@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -37,9 +38,14 @@ public class MainMenuScreen extends GameScreen {
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(texture));
 
-        // Set the font and scale
-        BitmapFont buttonFont = new BitmapFont(Gdx.files.internal("assets/fonts/rubikIso_regular.ttf"));
-        buttonFont.getData().setScale(2.0f); // Scale font before use
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("assets/fonts/rubik_iso_regular.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 48; // Adjust size to your preference
+        parameter.incremental = true; // Enable incremental loading for larger fonts
+        BitmapFont buttonFont = generator.generateFont(parameter);
+        buttonFont.getData().setScale(2.0f); // Scale font
+        generator.dispose(); // Dispose generator to avoid memory leaks
 
         textButtonStyle.font = buttonFont;
 
