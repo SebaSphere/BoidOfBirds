@@ -19,6 +19,7 @@ public class MainMenuScreen extends GameScreen {
     private SpriteBatch batch;
 
     private Texture texture;
+    private Texture background;
     private TextButton.TextButtonStyle textButtonStyle;
     private TextButton button;
 
@@ -30,6 +31,8 @@ public class MainMenuScreen extends GameScreen {
         super(game);
 
         batch = new SpriteBatch();
+
+        background = new Texture(Gdx.files.internal("assets/menu/main/MainMenu_Background.png"));
 
         // Texture for button
         texture = new Texture(Gdx.files.internal("assets/menu/game/instructions_menu.png"));
@@ -71,7 +74,12 @@ public class MainMenuScreen extends GameScreen {
         gameClient.viewport.apply();
         gameClient.batch.setProjectionMatrix(gameClient.viewport.getCamera().combined);
 
+        batch.begin();
 
+        // Draw the background image to cover the screen
+        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        batch.end();
 
         // Center the button on the screen
         button.setPosition(
