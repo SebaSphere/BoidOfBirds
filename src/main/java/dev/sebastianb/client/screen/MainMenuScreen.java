@@ -1,41 +1,29 @@
 package dev.sebastianb.client.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dev.sebastianb.client.GameClient;
 import dev.sebastianb.client.registry.ScreenRegistry;
 
-
-import java.util.ArrayList;
-
-// TODO: perhaps have a widget system to make it simple to make buttons?
 public class MainMenuScreen extends GameScreen {
 
     private SpriteBatch batch;
 
-    Texture texture;
-    TextButton.TextButtonStyle textButtonStyle;
-    Button button;
+    private Texture texture;
+    private TextButton.TextButtonStyle textButtonStyle;
+    private TextButton button;
 
-    Stage stage = new Stage();
+    private Stage stage = new Stage();
 
-    float realButtonWidth = 0, realButtonHeight;
-
-
+    private float realButtonWidth, realButtonHeight;
 
     public MainMenuScreen(GameClient game) {
         super(game);
@@ -45,77 +33,67 @@ public class MainMenuScreen extends GameScreen {
         // Texture for button
         texture = new Texture(Gdx.files.internal("assets/menu/game/instructions_menu.png"));
 
-        // Create textButtonStyle
+        // Create TextButtonStyle
         textButtonStyle = new TextButton.TextButtonStyle();
-
         textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(texture));
 
-
-        // Set the font you locally have available
-        BitmapFont buttonFont = new BitmapFont();
-        buttonFont.getData().setScale(5.0f);
-
+        // Set the font and scale
+        BitmapFont buttonFont = new BitmapFont(Gdx.files.internal("assets/fonts/rubikIso_regular.ttf"));
+        buttonFont.getData().setScale(2.0f); // Scale font before use
 
         textButtonStyle.font = buttonFont;
+
+        // Create the button
         button = new TextButton("Start", textButtonStyle);
 
-        realButtonHeight = button.getHeight();
+        // Get real dimensions after font scaling
         realButtonWidth = button.getWidth();
-
-
+        realButtonHeight = button.getHeight();
     }
 
     @Override
-    public void show()
-    {
-
+    public void show() {
+        // Add the button to the stage
+        stage.addActor(button);
+        Gdx.input.setInputProcessor(stage);
     }
 
-
-
     @Override
-    public void render(float v) {
+    public void render(float delta) {
         ScreenUtils.clear(Color.RED);
 
         gameClient.viewport.apply();
         gameClient.batch.setProjectionMatrix(gameClient.viewport.getCamera().combined);
 
-        gameClient.batch.begin();
-        {
-            gameClient.font.draw(gameClient.batch, "Welcome to the game!!! ", 1, 1.5f);
-            gameClient.font.draw(gameClient.batch, "Tap anywhere to begin!", 1, 1);
-        }
-        gameClient.batch.end();
 
 
+        // Center the button on the screen
         button.setPosition(
-                (float) Gdx.graphics.getWidth() / 2 - button.getWidth() / 2,
-                (float) Gdx.graphics.getHeight() / 2 - button.getHeight() / 2);
+                (Gdx.graphics.getWidth() - button.getWidth()) / 2,
+                (Gdx.graphics.getHeight() - button.getHeight()) / 2
+        );
 
-
-        float scale = Math.min(Gdx.graphics.getWidth() / realButtonWidth, Gdx.graphics.getHeight() / realButtonHeight);
-
+        // Scale the button size based on screen size
+        float scale = Math.min(
+                Gdx.graphics.getWidth() / realButtonWidth,
+                Gdx.graphics.getHeight() / realButtonHeight
+        );
         button.setSize(realButtonWidth * scale / 2, realButtonHeight * scale / 2);
 
+        // Draw the stage
+        stage.draw();
 
-        stage.addActor(button);
-        Gdx.input.setInputProcessor(stage);
-        // Input checking for button overlap
+        // Handle button click
         if (Gdx.input.justTouched()) {
-            float touchX = Gdx.input.getX(); // Screen coordinates
-            float touchY = Gdx.graphics.getHeight() - Gdx.input.getY(); // Invert Y-axis
+            float touchX = Gdx.input.getX();
+            float touchY = Gdx.graphics.getHeight() - Gdx.input.getY();
 
             if (touchX >= button.getX() && touchX <= button.getX() + button.getWidth() &&
                     touchY >= button.getY() && touchY <= button.getY() + button.getHeight()) {
-
                 this.dispose();
                 gameClient.setScreen(ScreenRegistry.WORLD_SCREEN.getGameScreen());
             }
         }
-
-
-        // Drawing the stage
-        stage.draw();
     }
 
     @Override
@@ -124,26 +102,9 @@ public class MainMenuScreen extends GameScreen {
     }
 
     @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose()
-    {
+    public void dispose() {
         batch.dispose();
         texture.dispose();
         stage.dispose();
-
     }
 }
