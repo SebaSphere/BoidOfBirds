@@ -10,14 +10,17 @@ import dev.sebastianb.world.WorldLevelStage;
 public class FakeWASDEntity extends Entity {
     private static final float VELOCITY_Y = 2f; // Speed at which the entity moves down
 
+
     public FakeWASDEntity(WorldLevelStage worldLevelStage, int x, int y) {
         super(worldLevelStage, x, y);
     }
 
     @Override
     public void tick(int time) {
-        // Move down
-        y -= VELOCITY_Y;
+        // Move down after 5 seconds
+        if (worldLevelStage.getTickCount() > WorldLevelStage.TICKS_PER_SECOND * 5) {
+            y -= VELOCITY_Y;
+        }
 
         // Check if it hits the bottom of the screen
         if (y + getSprite().getHeight() < 0) {

@@ -30,7 +30,8 @@ public class WorldLevelStage {
     public WorldLevelStage() {
         // test entity
         spawnBoid();
-        fakeWASDEntity = new FakeWASDEntity(this, 100, 100);
+        fakeWASDEntity
+                = new FakeWASDEntity(this, RenderUtils.monitorWidth / 40, RenderUtils.monitorHeight / 40);
 
 
         // use gdx time since start
