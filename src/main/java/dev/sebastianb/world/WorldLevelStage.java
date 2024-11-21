@@ -92,7 +92,7 @@ public class WorldLevelStage {
         }
         fakeWASDEntity.tick(tickCount);
 
-        if (tickCount % (TICKS_PER_SECOND * 2) == 0) {
+        if (tickCount % (TICKS_PER_SECOND * 1.2) == 0) {
             // Spawn new boids periodically
             int x, y;
 
