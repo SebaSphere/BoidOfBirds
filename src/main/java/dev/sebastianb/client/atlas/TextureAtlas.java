@@ -7,6 +7,7 @@ public class TextureAtlas {
 
     public static Sprite BIRD = getSprite(new Texture("assets/entity/fighter.png"));
     public static Sprite FAKE_WASD = getSprite(new Texture("assets/menu/game/WASD keys.png"));
+    public static Sprite DODO_PLAYER = getSprite(new Texture("assets/entity/dodo/12.png"));
 
     public static Sprite getSprite(Texture texture) {
         return new Sprite(texture);
