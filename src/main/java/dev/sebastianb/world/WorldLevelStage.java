@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dev.sebastianb.entity.Entity;
 import dev.sebastianb.entity.boid.SmallBoidEntity;
+import dev.sebastianb.util.RenderUtils;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,7 +16,9 @@ public class WorldLevelStage {
 
     private ArrayList<Entity> entities = new ArrayList<>();
 
-    private int TICK_SPREAD_DURATION = (int) (1000F/60F);
+    public static int TICKS_PER_SECOND = 60;
+
+    private int TICK_SPREAD_DURATION = (int) (1000F/TICKS_PER_SECOND);
     // used in how many times a tick will update per second, in this case 60tps
     // I could probably look into making it 20 tps and lerping if I wanted it to be smooth
 
@@ -23,19 +26,23 @@ public class WorldLevelStage {
 
     public WorldLevelStage() {
         // test entity
-        Random random = new Random();
+        spawnBoid();
 
-        for (int i = 0; i < 50; i++) {
-            int x = random.nextInt(400);
-            int y = random.nextInt(400);
-            var boid = new SmallBoidEntity(this, x, y);
-            boid.setVelocityX(-5 + random.nextFloat(10));
-            boid.setVelocityY(-5 + random.nextFloat(10));
 
-            entities.add(boid);
-        }
         // use gdx time since start
         lastTickTime = System.currentTimeMillis();
+    }
+
+    private Random random = new Random();
+
+    private void spawnBoid() {
+        int x = random.nextInt(RenderUtils.monitorWidth);
+        int y = random.nextInt(RenderUtils.monitorHeight);
+        var boid = new SmallBoidEntity(this, x, y);
+        boid.setVelocityX(-5 + random.nextFloat(10));
+        boid.setVelocityY(-5 + random.nextFloat(10));
+
+        entities.add(boid);
     }
 
     private boolean shouldUpdateTick = true;
@@ -61,6 +68,10 @@ public class WorldLevelStage {
     private void postTick() {
         for (Entity entity : entities) {
             entity.tick(tickCount);
+        }
+        if (tickCount % TICKS_PER_SECOND * 10 == 0) {
+            // try spawning again if player is within 200 units
+            spawnBoid();
         }
     }
 
