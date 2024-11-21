@@ -43,7 +43,7 @@ public class SmallBoidEntity extends Entity {
         velocityY += coherenceAdjustment.y + separationAdjustment.y + alignmentAdjustment.y;
 
         // Limit speed to avoid overly fast boids
-        limitSpeed(22);
+        limitSpeed(10);
 
         // Update position based on velocity
         this.x += velocityX;
@@ -55,29 +55,45 @@ public class SmallBoidEntity extends Entity {
     }
 
 
-
     public float getRotationAngle() {
-        rotation = (worldLevelStage.getTickCount() + rotationOffset) % 360;
-        return rotation;
+        return (float) Math.toDegrees(Math.atan2(velocityY, velocityX));
     }
 
+    /**
+     * Adjusts the velocity of the entity based on the boundaries of the window.
+     * If the entity reaches the horizontal or vertical edges of the window, the velocity is reversed
+     * and the position is adjusted to prevent the entity from going out of bounds.
+     */
     private void adjustVelocityForBoundaries() {
         int windowWidth = Gdx.graphics.getWidth();
         int windowHeight = Gdx.graphics.getHeight();
         int textureWidth = getSprite().getRegionWidth();
         int textureHeight = getSprite().getRegionHeight();
 
+        // Add a small buffer to prevent jittering when the sprite is right next to the boundary
+        int buffer = 5;
+
         // Reverse velocity when hitting horizontal edge
-        if (x < 0 || x + textureWidth > windowWidth) {
+        if (x < buffer || x + textureWidth + buffer > windowWidth) {
             velocityX = -velocityX;
+            // Set x back to within the window
+            x = Math.max(buffer, Math.min(x, windowWidth - textureWidth - buffer));
         }
 
         // Reverse velocity when hitting vertical edge
-        if (y < 0 || y + textureHeight > windowHeight) {
+        if (y < buffer || y + textureHeight + buffer > windowHeight) {
             velocityY = -velocityY;
+            // Set y back to within the window
+            y = Math.max(buffer, Math.min(y, windowHeight - textureHeight - buffer));
         }
     }
 
+    /**
+     * Retrieves a list of nearby SmallBoidEntity objects within a specified radius.
+     *
+     * @param radius The radius within which to search for nearby boids
+     * @return List of SmallBoidEntity objects within the specified radius
+     */
     private List<SmallBoidEntity> getNearbyBoids(float radius) {
         return worldLevelStage.getEntities().stream()
                 .filter(entity -> entity instanceof SmallBoidEntity && entity != this)
@@ -86,6 +102,12 @@ public class SmallBoidEntity extends Entity {
                 .toList();
     }
 
+    /**
+     * Calculates the coherence vector for the current boid based on the positions of nearby boids.
+     *
+     * @param nearbyBoids List of nearby boids from which to calculate coherence
+     * @return Vector2 representing the coherence adjustment for the current boid
+     */
     private Vector2 calculateCoherence(List<SmallBoidEntity> nearbyBoids) {
         if (nearbyBoids.isEmpty()) return new Vector2(0, 0);
 
@@ -98,6 +120,12 @@ public class SmallBoidEntity extends Entity {
         return centerOfMass.sub(this.x, this.y).scl(COHERENCE_RATE); // Steer towards center
     }
 
+    /**
+     * Calculates the separation vector for the current boid based on the distances to nearby boids.
+     *
+     * @param nearbyBoids List of nearby boids from which to calculate separation
+     * @return Vector2 representing the separation adjustment for the current boid
+     */
     private Vector2 calculateSeparation(List<SmallBoidEntity> nearbyBoids) {
         Vector2 separation = new Vector2();
         for (SmallBoidEntity boid : nearbyBoids) {
@@ -109,6 +137,12 @@ public class SmallBoidEntity extends Entity {
         return separation.scl(SEPARATION_RATE); // Steer away
     }
 
+    /**
+     * Calculates the alignment vector for the current boid based on the velocities of nearby boids.
+     *
+     * @param nearbyBoids List of nearby boids from which to calculate alignment
+     * @return Vector2 representing the alignment adjustment for the current boid
+     */
     private Vector2 calculateAlignment(List<SmallBoidEntity> nearbyBoids) {
         if (nearbyBoids.isEmpty()) return new Vector2(0, 0);
 
@@ -121,6 +155,11 @@ public class SmallBoidEntity extends Entity {
         return averageVelocity.sub(velocityX, velocityY).scl(ALIGNMENT_RATE); // Steer to match
     }
 
+    /**
+     * Limits the speed of the entity to the specified maximum speed.
+     *
+     * @param maxSpeed The maximum speed to limit the entity to
+     */
     private void limitSpeed(float maxSpeed) {
         float speed = (float) Math.sqrt(velocityX * velocityX + velocityY * velocityY);
         if (speed > maxSpeed) {
