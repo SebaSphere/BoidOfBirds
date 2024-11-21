@@ -61,11 +61,13 @@ public class Player extends Entity {
         int windowHeight = Gdx.graphics.getHeight();
         int textureWidth = getSprite().getRegionWidth();
         int textureHeight = getSprite().getRegionHeight();
+        int margin = 25;
 
-        // Keep the player within the window
-        x = Math.max(0, Math.min(x, windowWidth - textureWidth));
-        y = Math.max(0, Math.min(y, windowHeight - textureHeight));
+        // Keep the player within the window, considering the margin
+        x = Math.max(margin, Math.min(x, windowWidth - textureWidth - margin));
+        y = Math.max(margin, Math.min(y, windowHeight - textureHeight - margin));
     }
+
 
     @Override
     public void render(SpriteBatch spriteBatch) {

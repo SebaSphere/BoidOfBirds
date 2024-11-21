@@ -30,7 +30,8 @@ public class WorldLevelStage {
 
     public WorldLevelStage() {
         // Initialize player at position (200, 200)
-        player = new Player(this, 200, 200);
+        player
+                = new Player(this, RenderUtils.monitorWidth / 2, RenderUtils.monitorHeight / 2);
         entities.add(player);
 
         // Test entities

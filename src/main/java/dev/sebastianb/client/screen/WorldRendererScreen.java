@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import dev.sebastianb.Main;
 import dev.sebastianb.client.GameClient;
 import dev.sebastianb.entity.Entity;
+import dev.sebastianb.util.RenderUtils;
 import dev.sebastianb.world.WorldLevelStage;
 
 import java.io.File;
@@ -70,8 +71,8 @@ public class WorldRendererScreen extends GameScreen {
             batch.begin();
             font.getData().setScale(2f); // Set font size (optional)
             font.setColor(Color.RED); // Set font color (optional)
-            font.draw(batch, "Game Over!", 100, 200); // Text, x, y coordinates
-            font.draw(batch, "High Score: " + worldLevelStage.getBoidCount(), 100, 150); // High score text
+            font.draw(batch, "Game Over!", RenderUtils.monitorWidth - 100, 200); // Text, x, y coordinates
+            font.draw(batch, "High Score: " + worldLevelStage.getBoidCount(), RenderUtils.monitorWidth - 100, 150); // High score text
             batch.end();
 
         }

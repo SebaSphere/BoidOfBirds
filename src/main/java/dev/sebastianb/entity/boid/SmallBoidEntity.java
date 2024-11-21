@@ -79,7 +79,7 @@ public class SmallBoidEntity extends Entity {
         int textureHeight = getSprite().getRegionHeight();
 
         // Add a small buffer to prevent jittering when the sprite is right next to the boundary
-        int buffer = 5;
+        int buffer = 3;
 
         // Reverse velocity when hitting horizontal edge
         if (x < buffer || x + textureWidth + buffer > windowWidth) {
