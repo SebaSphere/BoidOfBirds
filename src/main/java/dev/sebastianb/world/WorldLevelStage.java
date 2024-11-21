@@ -34,7 +34,9 @@ public class WorldLevelStage {
         entities.add(player);
 
         // Test entities
-        spawnBoid();
+        int x = random.nextInt(RenderUtils.monitorWidth);
+        int y = random.nextInt(RenderUtils.monitorHeight);
+        spawnBoid(x, y);
         fakeWASDEntity
                 = new FakeWASDEntity(this, RenderUtils.monitorWidth / 40, RenderUtils.monitorHeight / 40);
 
@@ -43,9 +45,7 @@ public class WorldLevelStage {
 
     private Random random = new Random();
 
-    private void spawnBoid() {
-        int x = random.nextInt(RenderUtils.monitorWidth);
-        int y = random.nextInt(RenderUtils.monitorHeight);
+    private void spawnBoid(int x, int y) {
         var boid = new SmallBoidEntity(this, x, y);
         boid.setVelocityX(-5 + random.nextFloat(10));
         boid.setVelocityY(-5 + random.nextFloat(10));
@@ -94,7 +94,14 @@ public class WorldLevelStage {
 
         if (tickCount % (TICKS_PER_SECOND * 2) == 0) {
             // Spawn new boids periodically
-            spawnBoid();
+            int x, y;
+
+            do {
+                x = random.nextInt(RenderUtils.monitorWidth);
+                y = random.nextInt(RenderUtils.monitorHeight);
+            } while (Math.hypot(x - player.getX(), y - player.getY()) < 70); // Check distance
+
+            spawnBoid(x, y);
         }
     }
 
