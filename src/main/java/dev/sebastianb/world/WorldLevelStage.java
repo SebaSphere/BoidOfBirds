@@ -1,10 +1,9 @@
 package dev.sebastianb.world;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dev.sebastianb.entity.Entity;
 import dev.sebastianb.entity.FakeWASDEntity;
+import dev.sebastianb.entity.Player;
 import dev.sebastianb.entity.boid.SmallBoidEntity;
 import dev.sebastianb.util.RenderUtils;
 
@@ -16,24 +15,26 @@ public class WorldLevelStage {
     private int tickCount = 0;
 
     private ArrayList<Entity> entities = new ArrayList<>();
+    private Player player;
 
     public static int TICKS_PER_SECOND = 60;
 
-    private int TICK_SPREAD_DURATION = (int) (1000F/TICKS_PER_SECOND);
-    // used in how many times a tick will update per second, in this case 60tps
-    // I could probably look into making it 20 tps and lerping if I wanted it to be smooth
+    private int TICK_SPREAD_DURATION = (int) (1000F / TICKS_PER_SECOND);
+    // Used to control the tick rate (60 ticks per second).
 
     private long lastTickTime;
 
     public FakeWASDEntity fakeWASDEntity;
 
     public WorldLevelStage() {
-        // test entity
+        // Initialize player at position (200, 200)
+        player = new Player(this, 200, 200);
+        entities.add(player);
+
+        // Test entities
         spawnBoid();
         fakeWASDEntity = new FakeWASDEntity(this, 100, 100);
 
-
-        // use gdx time since start
         lastTickTime = System.currentTimeMillis();
     }
 
@@ -56,7 +57,6 @@ public class WorldLevelStage {
     }
 
     public void preTick() {
-
         if (lastTickTime + TICK_SPREAD_DURATION < System.currentTimeMillis()) {
             lastTickTime = System.currentTimeMillis();
             shouldUpdateTick = true;
@@ -74,8 +74,9 @@ public class WorldLevelStage {
             entity.tick(tickCount);
         }
         fakeWASDEntity.tick(tickCount);
+
         if (tickCount % (TICKS_PER_SECOND * 2) == 0) {
-            // try spawning again if player is within 200 units
+            // Spawn new boids periodically
             spawnBoid();
         }
     }
@@ -84,8 +85,15 @@ public class WorldLevelStage {
         return entities;
     }
 
-    public void removeEntity(Entity entity)
-    {
+    public void removeEntity(Entity entity) {
         entities.remove(entity);
+    }
+
+    public void render(SpriteBatch spriteBatch) {
+        // Render all entities, including the player
+        for (Entity entity : entities) {
+            entity.render(spriteBatch);
+        }
+        fakeWASDEntity.render(spriteBatch);
     }
 }
