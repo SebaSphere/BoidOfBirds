@@ -61,6 +61,7 @@ public class WorldRendererScreen extends GameScreen {
         for (Entity entity : worldLevelStage.getEntities()) {
             entity.render(batch);
         }
+        worldLevelStage.fakeWASDEntity.render(batch);
         batch.end();
     }
 

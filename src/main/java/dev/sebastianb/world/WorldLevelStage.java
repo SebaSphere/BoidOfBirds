@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dev.sebastianb.entity.Entity;
+import dev.sebastianb.entity.FakeWASDEntity;
 import dev.sebastianb.entity.boid.SmallBoidEntity;
 import dev.sebastianb.util.RenderUtils;
 
@@ -24,9 +25,12 @@ public class WorldLevelStage {
 
     private long lastTickTime;
 
+    public FakeWASDEntity fakeWASDEntity;
+
     public WorldLevelStage() {
         // test entity
         spawnBoid();
+        fakeWASDEntity = new FakeWASDEntity(this, 100, 100);
 
 
         // use gdx time since start
@@ -69,6 +73,7 @@ public class WorldLevelStage {
         for (Entity entity : entities) {
             entity.tick(tickCount);
         }
+        fakeWASDEntity.tick(tickCount);
         if (tickCount % (TICKS_PER_SECOND * 2) == 0) {
             // try spawning again if player is within 200 units
             spawnBoid();
@@ -79,4 +84,8 @@ public class WorldLevelStage {
         return entities;
     }
 
+    public void removeEntity(Entity entity)
+    {
+        entities.remove(entity);
+    }
 }
