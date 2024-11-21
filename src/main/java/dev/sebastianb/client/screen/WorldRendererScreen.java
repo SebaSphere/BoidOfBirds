@@ -1,17 +1,17 @@
 package dev.sebastianb.client.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
+import dev.sebastianb.Main;
 import dev.sebastianb.client.GameClient;
 import dev.sebastianb.entity.Entity;
 import dev.sebastianb.world.WorldLevelStage;
+
+import java.io.File;
 
 public class WorldRendererScreen extends GameScreen {
 
@@ -20,10 +20,7 @@ public class WorldRendererScreen extends GameScreen {
     private Texture background;
 
     private SpriteBatch batch;
-
-    private Stage stage;
-
-    private TextureRegion region; //added texture region
+    private BitmapFont font;
 
     public WorldRendererScreen(GameClient game, WorldLevelStage worldLevelStage) {
         super(game);
@@ -31,9 +28,10 @@ public class WorldRendererScreen extends GameScreen {
         this.worldLevelStage = worldLevelStage;
         this.batch = gameClient.batch;
 
+        font = new BitmapFont();
+
         background = new Texture(Gdx.files.internal("assets/menu/game/desert_moons.png")); // Replace with your image path
 
-        stage = new Stage(gameClient.viewport, gameClient.batch);
     }
 
     @Override
@@ -43,6 +41,10 @@ public class WorldRendererScreen extends GameScreen {
 
     @Override
     public void render(float delta) {
+        if (batch == null) {
+            batch = new SpriteBatch();
+        }
+
         ScreenUtils.clear(Color.BLACK);
 
         gameClient.viewport.apply();
@@ -59,8 +61,43 @@ public class WorldRendererScreen extends GameScreen {
         for (Entity entity : worldLevelStage.getEntities()) {
             entity.render(batch);
         }
+
         worldLevelStage.fakeWASDEntity.render(batch);
         batch.end();
+
+        if (worldLevelStage.isGameOver()) {
+            // render text with high score
+            batch.begin();
+            font.getData().setScale(2f); // Set font size (optional)
+            font.setColor(Color.RED); // Set font color (optional)
+            font.draw(batch, "Game Over!", 100, 200); // Text, x, y coordinates
+            font.draw(batch, "High Score: " + worldLevelStage.getBoidCount(), 100, 150); // High score text
+            batch.end();
+
+        }
+
+        // this is a really really bad thing you would NEVER do in production
+        // I tried setting the screen but it's complaining about SpriteBatch not being allocated
+        // when I try to set the screen and dispose
+        if (worldLevelStage.isTrulyGameOver()) {
+            try {
+                // Get the main class and invoke its main method
+                String className = Main.class.getName();
+                String javaHome = System.getProperty("java.home");
+                String javaBin = javaHome + File.separator + "bin" + File.separator + "java";
+                String classPath = System.getProperty("java.class.path");
+                String[] command = new String[]{javaBin, "-cp", classPath, className};
+
+                // Run the new process
+                ProcessBuilder builder = new ProcessBuilder(command);
+                builder.start();
+
+                // Exit the current application
+                System.exit(0);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -85,6 +122,6 @@ public class WorldRendererScreen extends GameScreen {
 
     @Override
     public void dispose() {
-        region.getTexture().dispose(); //dispose of texture when done
+        batch.dispose();
     }
 }

@@ -14,6 +14,8 @@ public class WorldLevelStage {
 
     private int tickCount = 0;
 
+    private int boidCount = 0;
+
     private ArrayList<Entity> entities = new ArrayList<>();
     private Player player;
 
@@ -49,6 +51,8 @@ public class WorldLevelStage {
         boid.setVelocityY(-5 + random.nextFloat(10));
 
         entities.add(boid);
+
+        boidCount++;
     }
 
     private boolean shouldUpdateTick = true;
@@ -57,16 +61,28 @@ public class WorldLevelStage {
         return tickCount;
     }
 
-    public void preTick() {
-        if (lastTickTime + TICK_SPREAD_DURATION < System.currentTimeMillis()) {
-            lastTickTime = System.currentTimeMillis();
-            shouldUpdateTick = true;
-        }
+    boolean isGameOver = false;
 
-        if (shouldUpdateTick) {
-            tickCount++;
-            shouldUpdateTick = false;
-            postTick();
+    // should flip from false to true after 5 or so seconds
+    boolean isTrulyGameOver = false;
+
+
+    public void preTick() {
+        if (!isGameOver) {
+            if (lastTickTime + TICK_SPREAD_DURATION < System.currentTimeMillis()) {
+                lastTickTime = System.currentTimeMillis();
+                shouldUpdateTick = true;
+            }
+
+            if (shouldUpdateTick) {
+                tickCount++;
+                shouldUpdateTick = false;
+                postTick();
+            }
+        } else {
+            if (lastTickTime + (1000 * 3) < System.currentTimeMillis()) {
+                isTrulyGameOver = true;
+            }
         }
     }
 
@@ -90,11 +106,19 @@ public class WorldLevelStage {
         entities.remove(entity);
     }
 
-    public void render(SpriteBatch spriteBatch) {
-        // Render all entities, including the player
-        for (Entity entity : entities) {
-            entity.render(spriteBatch);
-        }
-        fakeWASDEntity.render(spriteBatch);
+    public int getBoidCount() {
+        return boidCount;
+    }
+
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
+    public boolean isTrulyGameOver() {
+        return isTrulyGameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.isGameOver = gameOver;
     }
 }

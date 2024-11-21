@@ -69,6 +69,10 @@ public class MainMenuScreen extends GameScreen {
 
     @Override
     public void render(float delta) {
+        if (batch == null) {
+            batch = new SpriteBatch();
+        }
+
         ScreenUtils.clear(Color.RED);
 
         gameClient.viewport.apply();
@@ -104,8 +108,8 @@ public class MainMenuScreen extends GameScreen {
 
             if (touchX >= button.getX() && touchX <= button.getX() + button.getWidth() &&
                     touchY >= button.getY() && touchY <= button.getY() + button.getHeight()) {
-                this.dispose();
                 gameClient.setScreen(ScreenRegistry.WORLD_SCREEN.getGameScreen());
+                dispose();
             }
         }
     }
@@ -118,7 +122,5 @@ public class MainMenuScreen extends GameScreen {
     @Override
     public void dispose() {
         batch.dispose();
-        texture.dispose();
-        stage.dispose();
     }
 }

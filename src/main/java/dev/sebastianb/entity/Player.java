@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import dev.sebastianb.client.atlas.TextureAtlas;
+import dev.sebastianb.entity.boid.SmallBoidEntity;
 import dev.sebastianb.world.WorldLevelStage;
 
 public class Player extends Entity {
@@ -20,6 +22,17 @@ public class Player extends Entity {
         handleInput();
         // Ensure the player stays within the game window boundaries
         adjustPositionForBoundaries();
+
+        int radius = 20;
+        int boidInRange = worldLevelStage.getEntities().stream()
+                .filter(entity -> entity instanceof SmallBoidEntity)
+                // is in 15 radius
+                .filter(entity -> Vector2.dst(this.x, this.y, entity.getX(), entity.getY()) <= radius)
+                .toList().size();
+        if (boidInRange >= 1) {
+            worldLevelStage.setGameOver(true);
+        }
+
     }
 
     /**
