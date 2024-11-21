@@ -33,8 +33,6 @@ public class WorldRendererScreen extends GameScreen {
 
         background = new Texture(Gdx.files.internal("assets/menu/game/desert_moons.png")); // Replace with your image path
 
-        this.region = new TextureRegion(new Texture(Gdx.files.internal("assets/entity/dodo.png"))); // Initialize texture region with your texture
-
         stage = new Stage(gameClient.viewport, gameClient.batch);
     }
 
