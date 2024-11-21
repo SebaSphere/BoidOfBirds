@@ -4,28 +4,34 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dev.sebastianb.entity.Entity;
+import dev.sebastianb.entity.boid.SmallBoidEntity;
 
 import java.util.ArrayList;
 
 public class WorldLevelStage {
 
-    int tickCount = 0;
+    private int tickCount = 0;
 
     private ArrayList<Entity> entities = new ArrayList<>();
 
-    int TICK_SPREAD_DURATION = (int) (1000F/60F);
+    private int TICK_SPREAD_DURATION = (int) (1000F/60F);
     // used in how many times a tick will update per second, in this case 60tps
+    // I could probably look into making it 20 tps and lerping if I wanted it to be smooth
 
-    long lastTickTime;
+    private long lastTickTime;
 
     public WorldLevelStage() {
         // test entity
-        entities.add(new Entity(this, 10, 10));
+        entities.add(new SmallBoidEntity(this, 426, 250));
         // use gdx time since start
         lastTickTime = System.currentTimeMillis();
     }
 
-    boolean shouldUpdateTick = true;
+    private boolean shouldUpdateTick = true;
+
+    public int getTickCount() {
+        return tickCount;
+    }
 
     public void preTick() {
 
@@ -47,9 +53,8 @@ public class WorldLevelStage {
         }
     }
 
-
-
-
-
+    public ArrayList<Entity> getEntities() {
+        return entities;
+    }
 
 }

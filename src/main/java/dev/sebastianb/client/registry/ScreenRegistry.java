@@ -4,6 +4,7 @@ import dev.sebastianb.client.GameClient;
 import dev.sebastianb.client.screen.GameScreen;
 import dev.sebastianb.client.screen.MainMenuScreen;
 import dev.sebastianb.client.screen.WorldRendererScreen;
+import dev.sebastianb.world.WorldLevelStage;
 
 public enum ScreenRegistry {
     MENU,
@@ -23,11 +24,11 @@ public enum ScreenRegistry {
         }
     }
 
-    public static void register(GameClient gameClient) {
+    public static void register(GameClient gameClient, WorldLevelStage worldLevelStage) {
         for (ScreenRegistry screenRegistry : values()) {
             switch (screenRegistry) {
                 case MENU -> screenRegistry.setGameScreen(new MainMenuScreen(gameClient));
-                case WORLD_SCREEN -> screenRegistry.setGameScreen(new WorldRendererScreen(gameClient));
+                case WORLD_SCREEN -> screenRegistry.setGameScreen(new WorldRendererScreen(gameClient, worldLevelStage));
             }
         }
     }

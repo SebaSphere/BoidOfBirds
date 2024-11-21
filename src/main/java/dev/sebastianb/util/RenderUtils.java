@@ -11,10 +11,13 @@ public class RenderUtils {
         configuration.setTitle(Constants.GAME_NAME);
         configuration.useVsync(true);
         configuration.setForegroundFPS(Lwjgl3ApplicationConfiguration.getDisplayMode().refreshRate + 1);
-        configuration.setWindowedMode(800, 500); // this line changes the size of the window
         configuration.setWindowIcon("assets/icon.png");
         int[] monitorSize = {Lwjgl3ApplicationConfiguration.getDisplayMode().width, Lwjgl3ApplicationConfiguration.getDisplayMode().height};
         configuration.setWindowSizeLimits(monitorSize[0] / 3, monitorSize[1] / 3, monitorSize[0], monitorSize[1]);
+        configuration.setWindowedMode(monitorSize[0] / 3, monitorSize[1] / 3); // this line changes the size of the window
+
+        configuration.setResizable(false); // TODO: actually make resizeable as this breaks the world render
+
 
         return configuration;
     }

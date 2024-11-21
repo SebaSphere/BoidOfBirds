@@ -2,12 +2,15 @@ package dev.sebastianb.client;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import dev.sebastianb.client.atlas.TextureAtlas;
 import dev.sebastianb.client.screen.MainMenuScreen;
 import dev.sebastianb.client.registry.ScreenRegistry;
 import dev.sebastianb.client.screen.WorldRendererScreen;
+import dev.sebastianb.entity.Entity;
 import dev.sebastianb.world.WorldLevelStage;
 
 public class GameClient extends Game {
@@ -24,13 +27,15 @@ public class GameClient extends Game {
         batch = new SpriteBatch();
         // use libGDX's default font
         font = new BitmapFont();
-        viewport = new FitViewport(8, 5);
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         //font has 15pt, but we need to scale it to our viewport by ratio of viewport height to screen height
-        font.setUseIntegerPositions(false);
+        font.setUseIntegerPositions(true);
         font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight());
 
-        ScreenRegistry.register(this);
+        TextureAtlas.register();
+
+        ScreenRegistry.register(this, worldLevelStage);
 
         this.setScreen(ScreenRegistry.MENU.getGameScreen());
     }

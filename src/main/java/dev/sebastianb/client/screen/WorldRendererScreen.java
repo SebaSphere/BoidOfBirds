@@ -3,16 +3,37 @@ package dev.sebastianb.client.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import dev.sebastianb.client.GameClient;
+import dev.sebastianb.entity.Entity;
+import dev.sebastianb.world.WorldLevelStage;
 
 public class WorldRendererScreen extends GameScreen {
 
     private GameClient gameClient;
+    private WorldLevelStage worldLevelStage;
 
-    public WorldRendererScreen(GameClient game) {
+    private SpriteBatch batch;
+
+    private Stage stage;
+
+    private TextureRegion region; //added texture region
+
+    public WorldRendererScreen(GameClient game, WorldLevelStage worldLevelStage) {
         super(game);
         this.gameClient = game;
+        this.worldLevelStage = worldLevelStage;
+        this.batch = gameClient.batch;
+
+
+        this.region = new TextureRegion(new Texture(Gdx.files.internal("assets/entity/dodo.png"))); // Initialize texture region with your texture
+
+        stage = new Stage(gameClient.viewport, gameClient.batch);
     }
 
     @Override
@@ -22,17 +43,16 @@ public class WorldRendererScreen extends GameScreen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.BLUE);
+        ScreenUtils.clear(Color.BLACK);
 
         gameClient.viewport.apply();
-        gameClient.batch.setProjectionMatrix(gameClient.viewport.getCamera().combined);
+        batch.setProjectionMatrix(gameClient.viewport.getCamera().combined);
 
-        gameClient.batch.begin();
-        {
-            
+        batch.begin();
+        for (Entity entity : worldLevelStage.getEntities()) {
+            entity.render(batch);
         }
-        gameClient.batch.end();
-
+        batch.end();
     }
 
     @Override
@@ -57,6 +77,6 @@ public class WorldRendererScreen extends GameScreen {
 
     @Override
     public void dispose() {
-
+        region.getTexture().dispose(); //dispose of texture when done
     }
 }
