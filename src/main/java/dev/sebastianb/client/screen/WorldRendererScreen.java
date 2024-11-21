@@ -17,6 +17,7 @@ public class WorldRendererScreen extends GameScreen {
 
     private GameClient gameClient;
     private WorldLevelStage worldLevelStage;
+    private Texture background;
 
     private SpriteBatch batch;
 
@@ -30,6 +31,7 @@ public class WorldRendererScreen extends GameScreen {
         this.worldLevelStage = worldLevelStage;
         this.batch = gameClient.batch;
 
+        background = new Texture(Gdx.files.internal("assets/menu/game/desert_moons.png")); // Replace with your image path
 
         this.region = new TextureRegion(new Texture(Gdx.files.internal("assets/entity/dodo.png"))); // Initialize texture region with your texture
 
@@ -47,6 +49,13 @@ public class WorldRendererScreen extends GameScreen {
 
         gameClient.viewport.apply();
         batch.setProjectionMatrix(gameClient.viewport.getCamera().combined);
+
+        batch.begin();
+
+        // Draw the background image to cover the screen
+        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        batch.end();
 
         batch.begin();
         for (Entity entity : worldLevelStage.getEntities()) {
