@@ -69,7 +69,7 @@ public class WorldLevelStage {
         for (Entity entity : entities) {
             entity.tick(tickCount);
         }
-        if (tickCount % TICKS_PER_SECOND * 10 == 0) {
+        if (tickCount % (TICKS_PER_SECOND * 2) == 0) {
             // try spawning again if player is within 200 units
             spawnBoid();
         }

@@ -15,7 +15,7 @@ public class SmallBoidEntity extends Entity {
 
 
     private static final float COHERENCE_RATE = 0.05f;  // Rate for steering towards the group
-    private static final float SEPARATION_DISTANCE = 20F; // Minimum distance to maintain
+    private static final float SEPARATION_DISTANCE = 40F; // Minimum distance to maintain
     private static final float SEPARATION_RATE = 0.2f;  // Rate for steering away
     private static final float ALIGNMENT_RATE = 0.05f;  // Rate for matching speed/direction
 
@@ -39,7 +39,7 @@ public class SmallBoidEntity extends Entity {
     public void tick(int time) {
 
         // Get all nearby boids
-        List<SmallBoidEntity> nearbyBoids = getNearbyBoids(40);
+        List<SmallBoidEntity> nearbyBoids = getNearbyBoids(80);
 
         // Calculate adjustments
         Vector2 coherenceAdjustment = calculateCoherence(nearbyBoids);
@@ -181,6 +181,7 @@ public class SmallBoidEntity extends Entity {
         super.render(spriteBatch);
         TextureAtlas.BIRD.setPosition(this.x, this.y);
         TextureAtlas.BIRD.setRotation((float) (getRotationAngle() + 270));
+        TextureAtlas.BIRD.setScale(0.7f);
         TextureAtlas.BIRD.draw(spriteBatch);
     }
 
