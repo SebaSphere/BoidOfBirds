@@ -7,6 +7,10 @@ import dev.sebastianb.entity.Player;
 import dev.sebastianb.entity.boid.SmallBoidEntity;
 import dev.sebastianb.util.RenderUtils;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -34,9 +38,14 @@ public class WorldLevelStage {
                 = new Player(this, RenderUtils.monitorWidth / 2, RenderUtils.monitorHeight / 2);
         entities.add(player);
 
-        // Test entities
-        int x = random.nextInt(RenderUtils.monitorWidth);
-        int y = random.nextInt(RenderUtils.monitorHeight);
+        int x, y;
+
+        do {
+            x = random.nextInt(RenderUtils.monitorWidth);
+            y = random.nextInt(RenderUtils.monitorHeight);
+            System.out.println("AA");
+        } while (Math.hypot(x - player.getX(), y - player.getY()) < 100); // Check distance
+
         spawnBoid(x, y);
         fakeWASDEntity
                 = new FakeWASDEntity(this, RenderUtils.monitorWidth / 40, RenderUtils.monitorHeight / 40);
@@ -100,7 +109,8 @@ public class WorldLevelStage {
             do {
                 x = random.nextInt(RenderUtils.monitorWidth);
                 y = random.nextInt(RenderUtils.monitorHeight);
-            } while (Math.hypot(x - player.getX(), y - player.getY()) < 70); // Check distance
+                System.out.println();
+            } while (Math.hypot(x - player.getX(), y - player.getY()) < 100); // Check distance
 
             spawnBoid(x, y);
         }
@@ -126,7 +136,58 @@ public class WorldLevelStage {
         return isTrulyGameOver;
     }
 
+    boolean hasAddedScore = false;
+
     public void setGameOver(boolean gameOver) {
         this.isGameOver = gameOver;
+
+        if (!hasAddedScore) {
+            this.addScoreToFile(getBoidCount());
+            System.out.println(getHighestBoidCountFromFile());
+        }
     }
+
+
+    public int getHighestBoidCountFromFile() {
+        String filePath = "scores.txt";
+        BufferedReader reader = null;
+        int maxCount = Integer.MIN_VALUE;
+        try {
+            reader = new BufferedReader(new FileReader(filePath));
+            String line = reader.readLine();
+            while (line != null) {
+                try {
+                    int count = Integer.parseInt(line.trim());
+                    maxCount = Math.max(maxCount, count);
+                } catch (NumberFormatException e) {
+                    // Ignore malformed lines
+                }
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return maxCount;
+    }
+
+    public void addScoreToFile(int score) {
+        String filePath = "scores.txt";
+        FileWriter writer;
+        try {
+            writer = new FileWriter(filePath, true);  // Set the second argument to "true" for appending
+            writer.write(String.valueOf(score) + System.lineSeparator());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -72,7 +72,10 @@ public class WorldRendererScreen extends GameScreen {
             font.getData().setScale(2f); // Set font size (optional)
             font.setColor(Color.RED); // Set font color (optional)
             font.draw(batch, "Game Over!", RenderUtils.monitorWidth - 100, 200); // Text, x, y coordinates
-            font.draw(batch, "High Score: " + worldLevelStage.getBoidCount(), RenderUtils.monitorWidth - 100, 150); // High score text
+            font.draw(batch, "High Score: " + worldLevelStage.getHighestBoidCountFromFile(), RenderUtils.monitorWidth - 100, 150); // High score text
+            font.draw(batch, "Round Score: " + worldLevelStage.getBoidCount(), RenderUtils.monitorWidth - 100, 100); // score text
+
+
             batch.end();
 
         }
