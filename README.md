@@ -7,3 +7,6 @@ This repository was done as a group project for COP2800, Java Programming at Mia
 
 # How to Play
 JVM 21 required to be installed on your computer, simply click on the jar and try to avoid the entities.
+
+The latest buildable jar can be found at https://drive.google.com/file/d/1hxS1crZoizhHkYSNeGIajmPTu-GlaZsL/view?usp=sharing
+
