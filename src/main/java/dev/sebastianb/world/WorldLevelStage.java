@@ -43,7 +43,6 @@ public class WorldLevelStage {
         do {
             x = random.nextInt(RenderUtils.monitorWidth);
             y = random.nextInt(RenderUtils.monitorHeight);
-            System.out.println("AA");
         } while (Math.hypot(x - player.getX(), y - player.getY()) < 100); // Check distance
 
         spawnBoid(x, y);
@@ -109,7 +108,6 @@ public class WorldLevelStage {
             do {
                 x = random.nextInt(RenderUtils.monitorWidth);
                 y = random.nextInt(RenderUtils.monitorHeight);
-                System.out.println();
             } while (Math.hypot(x - player.getX(), y - player.getY()) < 100); // Check distance
 
             spawnBoid(x, y);
@@ -143,7 +141,6 @@ public class WorldLevelStage {
 
         if (!hasAddedScore) {
             this.addScoreToFile(getBoidCount());
-            System.out.println(getHighestBoidCountFromFile());
         }
     }
 
