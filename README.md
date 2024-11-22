@@ -3,7 +3,9 @@ This game is a simulation inspired by the Boids algorithm, where entities (resem
 
 New entities spawn into the simulation every 10 seconds, adding dynamic variety to the ecosystem.
 
-This repository was done as a group project for COP2800, Java Programming at Miami Dade College using Conventional Commits (https://www.conventionalcommits.org/en/v1.0.0/)
+Your goal is to avoid these entities as the player as long as possible.
+
+This repository was done as a group project for COP2800, Java Programming, at Miami Dade College using Conventional Commits (https://www.conventionalcommits.org/en/v1.0.0/)
 
 # How to Play
 JVM 21 required to be installed on your computer, simply click on the jar and try to avoid the entities.
