@@ -1,11 +1,9 @@
-package dev.sebastianb.entity;
+package dev.sebastianb.boids.entity;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import dev.sebastianb.client.atlas.TextureAtlas;
-import dev.sebastianb.world.WorldLevelStage;
+import dev.sebastianb.boids.client.atlas.TextureAtlas;
+import dev.sebastianb.boids.world.WorldLevelStage;
 
 public class FakeWASDEntity extends Entity {
     private static final float VELOCITY_Y = 2f; // Speed at which the entity moves down

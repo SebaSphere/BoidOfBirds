@@ -1,7 +1,7 @@
-package dev.sebastianb.client.screen;
+package dev.sebastianb.boids.client.screen;
 
 import com.badlogic.gdx.Screen;
-import dev.sebastianb.client.GameClient;
+import dev.sebastianb.boids.client.GameClient;
 
 public class GameScreen implements Screen {
 

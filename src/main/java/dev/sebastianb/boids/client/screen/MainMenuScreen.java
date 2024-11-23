@@ -1,4 +1,4 @@
-package dev.sebastianb.client.screen;
+package dev.sebastianb.boids.client.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -11,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import dev.sebastianb.client.GameClient;
-import dev.sebastianb.client.registry.ScreenRegistry;
+import dev.sebastianb.boids.client.GameClient;
+import dev.sebastianb.boids.client.registry.ScreenRegistry;
 
 public class MainMenuScreen extends GameScreen {
 

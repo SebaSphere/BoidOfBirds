@@ -1,4 +1,4 @@
-package dev.sebastianb.util;
+package dev.sebastianb.boids.util;
 
 public interface Constants {
 

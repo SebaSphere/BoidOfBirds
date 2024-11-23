@@ -1,13 +1,13 @@
-package dev.sebastianb.entity;
+package dev.sebastianb.boids.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import dev.sebastianb.client.atlas.TextureAtlas;
-import dev.sebastianb.entity.boid.SmallBoidEntity;
-import dev.sebastianb.world.WorldLevelStage;
+import dev.sebastianb.boids.client.atlas.TextureAtlas;
+import dev.sebastianb.boids.entity.boid.SmallBoidEntity;
+import dev.sebastianb.boids.world.WorldLevelStage;
 
 public class Player extends Entity {
 

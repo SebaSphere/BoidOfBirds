@@ -1,11 +1,10 @@
-package dev.sebastianb.world;
+package dev.sebastianb.boids.world;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import dev.sebastianb.entity.Entity;
-import dev.sebastianb.entity.FakeWASDEntity;
-import dev.sebastianb.entity.Player;
-import dev.sebastianb.entity.boid.SmallBoidEntity;
-import dev.sebastianb.util.RenderUtils;
+import dev.sebastianb.boids.entity.Entity;
+import dev.sebastianb.boids.entity.FakeWASDEntity;
+import dev.sebastianb.boids.entity.Player;
+import dev.sebastianb.boids.entity.boid.SmallBoidEntity;
+import dev.sebastianb.boids.util.RenderUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

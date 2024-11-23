@@ -1,8 +1,8 @@
-package dev.sebastianb;
+package dev.sebastianb.boids;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
-import dev.sebastianb.client.GameClient;
-import dev.sebastianb.util.RenderUtils;
+import dev.sebastianb.boids.client.GameClient;
+import dev.sebastianb.boids.util.RenderUtils;
 
 public class Main {
 

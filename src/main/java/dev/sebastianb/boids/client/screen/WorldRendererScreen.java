@@ -1,4 +1,4 @@
-package dev.sebastianb.client.screen;
+package dev.sebastianb.boids.client.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -6,11 +6,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import dev.sebastianb.Main;
-import dev.sebastianb.client.GameClient;
-import dev.sebastianb.entity.Entity;
-import dev.sebastianb.util.RenderUtils;
-import dev.sebastianb.world.WorldLevelStage;
+import dev.sebastianb.boids.Main;
+import dev.sebastianb.boids.client.GameClient;
+import dev.sebastianb.boids.entity.Entity;
+import dev.sebastianb.boids.util.RenderUtils;
+import dev.sebastianb.boids.world.WorldLevelStage;
 
 import java.io.File;
 

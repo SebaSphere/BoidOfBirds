@@ -1,13 +1,12 @@
-package dev.sebastianb.entity.boid;
+package dev.sebastianb.boids.entity.boid;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import dev.sebastianb.client.atlas.TextureAtlas;
-import dev.sebastianb.entity.Entity;
-import dev.sebastianb.world.WorldLevelStage;
+import dev.sebastianb.boids.client.atlas.TextureAtlas;
+import dev.sebastianb.boids.entity.Entity;
+import dev.sebastianb.boids.world.WorldLevelStage;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package dev.sebastianb.client.atlas;
+package dev.sebastianb.boids.client.atlas;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;

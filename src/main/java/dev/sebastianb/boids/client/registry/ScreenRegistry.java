@@ -1,10 +1,10 @@
-package dev.sebastianb.client.registry;
+package dev.sebastianb.boids.client.registry;
 
-import dev.sebastianb.client.GameClient;
-import dev.sebastianb.client.screen.GameScreen;
-import dev.sebastianb.client.screen.MainMenuScreen;
-import dev.sebastianb.client.screen.WorldRendererScreen;
-import dev.sebastianb.world.WorldLevelStage;
+import dev.sebastianb.boids.client.GameClient;
+import dev.sebastianb.boids.client.screen.GameScreen;
+import dev.sebastianb.boids.client.screen.MainMenuScreen;
+import dev.sebastianb.boids.client.screen.WorldRendererScreen;
+import dev.sebastianb.boids.world.WorldLevelStage;
 
 public enum ScreenRegistry {
     MENU,

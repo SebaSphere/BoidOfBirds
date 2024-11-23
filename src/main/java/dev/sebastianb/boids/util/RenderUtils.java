@@ -1,4 +1,4 @@
-package dev.sebastianb.util;
+package dev.sebastianb.boids.util;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 

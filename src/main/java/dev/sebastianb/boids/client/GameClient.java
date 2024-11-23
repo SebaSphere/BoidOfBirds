@@ -1,17 +1,14 @@
-package dev.sebastianb.client;
+package dev.sebastianb.boids.client;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import dev.sebastianb.client.atlas.TextureAtlas;
-import dev.sebastianb.client.screen.MainMenuScreen;
-import dev.sebastianb.client.registry.ScreenRegistry;
-import dev.sebastianb.client.screen.WorldRendererScreen;
-import dev.sebastianb.entity.Entity;
-import dev.sebastianb.world.WorldLevelStage;
+import dev.sebastianb.boids.client.atlas.TextureAtlas;
+import dev.sebastianb.boids.client.registry.ScreenRegistry;
+import dev.sebastianb.boids.client.screen.WorldRendererScreen;
+import dev.sebastianb.boids.world.WorldLevelStage;
 
 public class GameClient extends Game {
 
