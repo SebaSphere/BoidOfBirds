@@ -2,10 +2,15 @@
 
 plugins {
     id 'java'
+    id 'edu.sc.seis.launch4j' version '3.0.6'
 }
 
 group 'dev.sebastianb'
 version '1.0.1-SNAPSHOT'
+
+launch4j {
+    mainClassName = 'dev.sebastianb.boids.Main'
+}
 
 java {
     toolchain {
@@ -25,7 +30,7 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     manifest {
-        attributes 'Main-Class': 'dev.sebastianb.Main'
+        attributes 'Main-Class': 'dev.sebastianb.boids.Main'
     }
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
@@ -35,7 +40,7 @@ jar {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'dev.sebastianb.Main'
+        attributes 'Main-Class': 'dev.sebastianb.boids.Main'
     }
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
