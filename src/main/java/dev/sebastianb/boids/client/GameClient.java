@@ -52,6 +52,11 @@ public class GameClient extends Game {
             worldLevelStage.preTick();
             hasWorldBeenLoaded = true;
         }
+        if (worldLevelStage.isTrulyGameOver()) {
+            worldLevelStage = worldLevelStage.clearWorld();
+            ScreenRegistry.register(this, worldLevelStage);
+            this.setScreen(ScreenRegistry.MENU.getGameScreen());
+        }
 
     }
 

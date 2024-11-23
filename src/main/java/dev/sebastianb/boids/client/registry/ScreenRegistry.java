@@ -17,11 +17,7 @@ public enum ScreenRegistry {
     }
 
     public void setGameScreen(GameScreen gameScreen) {
-        if (this.gameScreen == null) {
-            this.gameScreen = gameScreen;
-        } else {
-            throw new RuntimeException("Screen already registered");
-        }
+        this.gameScreen = gameScreen;
     }
 
     public static void register(GameClient gameClient, WorldLevelStage worldLevelStage) {

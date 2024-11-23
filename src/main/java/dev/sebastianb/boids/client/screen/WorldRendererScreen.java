@@ -28,6 +28,7 @@ public class WorldRendererScreen extends GameScreen {
         super(game);
         this.gameClient = game;
         this.worldLevelStage = worldLevelStage;
+
         this.batch = gameClient.batch;
 
         font = new BitmapFont();
@@ -80,6 +81,7 @@ public class WorldRendererScreen extends GameScreen {
             batch.end();
 
         }
+
 
         // this is a really really bad thing you would NEVER do in production
         // I tried setting the screen but it's complaining about SpriteBatch not being allocated
