@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import dev.sebastianb.boids.client.atlas.TextureAtlas;
 import dev.sebastianb.boids.client.registry.ScreenRegistry;
+import dev.sebastianb.boids.client.screen.MainMenuScreen;
 import dev.sebastianb.boids.client.screen.WorldRendererScreen;
 import dev.sebastianb.boids.world.WorldLevelStage;
 
@@ -42,13 +43,16 @@ public class GameClient extends Game {
         super.resize(width, height);
     }
 
+    boolean hasWorldBeenLoaded = false;
     @Override
     public void render() {
         super.render();
         // if in world screen, update logic
         if (this.screen instanceof WorldRendererScreen worldRendererScreen) {
             worldLevelStage.preTick();
+            hasWorldBeenLoaded = true;
         }
+
     }
 
     @Override

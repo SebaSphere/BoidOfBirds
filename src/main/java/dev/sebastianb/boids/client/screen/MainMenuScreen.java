@@ -109,7 +109,7 @@ public class MainMenuScreen extends GameScreen {
             if (touchX >= button.getX() && touchX <= button.getX() + button.getWidth() &&
                     touchY >= button.getY() && touchY <= button.getY() + button.getHeight()) {
                 gameClient.setScreen(ScreenRegistry.WORLD_SCREEN.getGameScreen());
-                dispose();
+
             }
         }
     }

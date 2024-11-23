@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import dev.sebastianb.boids.Main;
 import dev.sebastianb.boids.client.GameClient;
+import dev.sebastianb.boids.client.registry.ScreenRegistry;
 import dev.sebastianb.boids.entity.Entity;
 import dev.sebastianb.boids.util.RenderUtils;
 import dev.sebastianb.boids.world.WorldLevelStage;
@@ -84,23 +85,8 @@ public class WorldRendererScreen extends GameScreen {
         // I tried setting the screen but it's complaining about SpriteBatch not being allocated
         // when I try to set the screen and dispose
         if (worldLevelStage.isTrulyGameOver()) {
-            try {
-                // Get the main class and invoke its main method
-                String className = Main.class.getName();
-                String javaHome = System.getProperty("java.home");
-                String javaBin = javaHome + File.separator + "bin" + File.separator + "java";
-                String classPath = System.getProperty("java.class.path");
-                String[] command = new String[]{javaBin, "-cp", classPath, className};
-
-                // Run the new process
-                ProcessBuilder builder = new ProcessBuilder(command);
-                builder.start();
-
-                // Exit the current application
-                System.exit(0);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            worldLevelStage = worldLevelStage.clearWorld();
+            gameClient.setScreen(ScreenRegistry.MENU.getGameScreen());
         }
     }
 
@@ -126,6 +112,6 @@ public class WorldRendererScreen extends GameScreen {
 
     @Override
     public void dispose() {
-        batch.dispose();
+
     }
 }

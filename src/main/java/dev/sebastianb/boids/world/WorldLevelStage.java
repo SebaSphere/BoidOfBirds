@@ -186,4 +186,10 @@ public class WorldLevelStage {
         }
     }
 
+    public WorldLevelStage clearWorld() {
+        isGameOver = false;
+        isTrulyGameOver = false;
+        return new WorldLevelStage();
+    }
+
 }
