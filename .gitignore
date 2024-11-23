@@ -170,4 +170,4 @@ temp/
 /.gradle/
 /build/
 /.idea/
-/.idea/
+/build_scripts/out-windows64

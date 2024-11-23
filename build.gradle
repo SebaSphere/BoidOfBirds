@@ -1,8 +1,27 @@
 
 
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+
+    }
+    dependencies {
+        classpath group: 'org.mini2Dx', name: 'parcl', version: '1.8.0'
+    }
+}
+
 plugins {
     id 'java'
     id 'edu.sc.seis.launch4j' version '3.0.6'
+
+}
+
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 group 'dev.sebastianb'
@@ -12,11 +31,7 @@ launch4j {
     mainClassName = 'dev.sebastianb.boids.Main'
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
+
 
 repositories {
     mavenCentral()
@@ -60,6 +75,9 @@ dependencies {
     implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
     implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
     implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+
+    implementation 'com.github.mini2Dx:parcl:1.8.0'
+
 
 }
 
