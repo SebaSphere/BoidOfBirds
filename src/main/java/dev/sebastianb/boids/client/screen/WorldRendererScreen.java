@@ -83,9 +83,6 @@ public class WorldRendererScreen extends GameScreen {
         }
 
 
-        // this is a really really bad thing you would NEVER do in production
-        // I tried setting the screen but it's complaining about SpriteBatch not being allocated
-        // when I try to set the screen and dispose
         if (worldLevelStage.isTrulyGameOver()) {
             worldLevelStage = worldLevelStage.clearWorld();
             gameClient.setScreen(ScreenRegistry.MENU.getGameScreen());
